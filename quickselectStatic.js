@@ -26,6 +26,8 @@ const quickSelect = (function(){
         return a - b;
     }
 
+    // for scoping without to avoid passing same array
+    // argument repeatedly, pseudo-static member variable
     let arr = null;
 
     /**
@@ -63,7 +65,6 @@ const quickSelect = (function(){
                 }
             }
             swap(i, end);
-
             if (i === k) {
                 break;
             } else if (i > k) {

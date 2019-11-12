@@ -27,8 +27,10 @@ const quickSort = (function(){
     function defaultCompare(a, b){
         return a - b;
     }
+
     // for scoping without recursive calls having to pass
-    // same array or function arguments repeatedly
+    // same array or function arguments repeatedly,
+    // acting as pseudo-static member variables
     let arr = null;
     let comparator = defaultCompare;
 
@@ -55,7 +57,6 @@ const quickSort = (function(){
             swap(pivotIndex, end);
             let i = begin;
             let j = end - 1;
-            // TODO
             while (i <= j) {
                 if (comparator(arr[i], pivot) <= 0) {
                     ++i;
