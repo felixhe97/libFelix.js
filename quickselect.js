@@ -1,8 +1,9 @@
 /**
- * Find k-th value in array, based on comparator
- * @param {Array} arr - input
+ * Find k-th value in array, based on comparator.
+ * If answer is NaN, error in arguments or in function 
+ * @param {Array} arrayToSearch - input array
  * @param {Number} k - 1-based thing to find
- * @param {Function} [comparator] - optional, default is find k-th smallest
+ * @param {Function} [compareFunction] - optional, default is find k-th smallest
  */
 const quickSelect = (function(){
     /**
@@ -26,16 +27,13 @@ const quickSelect = (function(){
         return a - b;
     }
 
-    // to avoid passing same array argument,
-    // pseudo-static member variable
-    let arr = null;
-
     /**
      * Swap elements in arr[i] and arr[j]
+     * @param {Array} arr
      * @param {Number} i 
      * @param {Number} j 
      */
-    function swap(i, j) {
+    function swap(arr, i, j) {
         let temp = arr[i];
         arr[i] = arr[j];
         arr[j] = temp;
@@ -43,28 +41,29 @@ const quickSelect = (function(){
 
     /**
      * Main quickselect logic, acting on static arr variable
+     * @param {Array} arr - array to search
      * @param {Number} k - kth item to return 
      * @param {Function} [comparator] - optional, default is find k-th smallest
      */
-    function iterativeQuickSelect(k, comparator = defaultCompare){
+    function iterativeQuickSelect(arr, k, comparator = defaultCompare){
         let begin = 0;
         let end = arr.length - 1;
         --k;
         while(begin < end) {
             let pivotIndex = getRandIndex(begin, end);
             let pivot = arr[pivotIndex];
-            swap(pivotIndex, end);
+            swap(arr, pivotIndex, end);
             let i = begin;
             let j = end - 1;
             while (i <= j) {
                 if (comparator(arr[i], pivot) <= 0) {
                     ++i;
                 } else {
-                    swap(i, j);
+                    swap(arr, i, j);
                     --j;
                 }
             }
-            swap(i, end);
+            swap(arr, i, end);
             if (i === k) {
                 break;
             } else if (i > k) {
@@ -77,15 +76,13 @@ const quickSelect = (function(){
     }
 
     return function(arrayToSearch, k, compareFunction) {
-        let ans = -1;
+        let ans = NaN;
         if (arrayToSearch && Array.isArray(arrayToSearch) && k && Number.isInteger(k)) {
-            arr = arrayToSearch;
             if (compareFunction && typeof compareFunction == "function") {
-                ans = iterativeQuickSelect(k, compareFunction);
+                ans = iterativeQuickSelect(arrayToSearch, k, compareFunction);
             } else {
-                ans = iterativeQuickSelect(k);
+                ans = iterativeQuickSelect(arrayToSearch, k);
             }
-            arr = null;
         }
         return ans;
     }
