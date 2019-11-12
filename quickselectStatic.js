@@ -26,8 +26,8 @@ const quickSelect = (function(){
         return a - b;
     }
 
-    // for scoping without to avoid passing same array
-    // argument repeatedly, pseudo-static member variable
+    // to avoid passing same array argument,
+    // pseudo-static member variable
     let arr = null;
 
     /**
