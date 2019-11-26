@@ -141,7 +141,7 @@ class Deque {
      * @param {*} item to remove from deque
      * @returns {Number} new length, or -1 
      */
-    remove(item) {
+    removeItem(item) {
         if (this.length) {
             let temp = this.head;
             while (temp) {
@@ -175,7 +175,7 @@ class Deque {
      * @returns {*} - item at index of deque, or null
      */
     at(index) {
-        if (typeof index == "number" && index < this.length) {
+        if (Number.isInteger(index) && index < this.length) {
             let node = this.head;
             while (index--) {
                 node = node.next;
