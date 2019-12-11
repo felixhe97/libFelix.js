@@ -1,5 +1,5 @@
 /**
- * Adjacency list implementation of directed graph data structure
+ * Adjacency list implementation of graph data structure
  */
 class AdjacencyList {
     /**
