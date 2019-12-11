@@ -38,9 +38,7 @@ function propagateDown(arr, comparator) {
         if (indexSecondChild >= arr.length || comparator(arr[indexFirstChild], arr[indexSecondChild]) <= 0) {
             if (comparator(arr[indexFirstChild], arr[n]) <= 0) {
                 swap(arr, n, indexFirstChild);
-                n = indexFirstChild
-                indexFirstChild = 2*n + 1;
-                indexSecondChild = 2*n + 2;
+                n = indexFirstChild;
             } else {
                 break;
             }
@@ -48,12 +46,12 @@ function propagateDown(arr, comparator) {
             if (comparator(arr[indexSecondChild], arr[n]) <= 0) {
                 swap(arr, n, indexSecondChild);
                 n = indexSecondChild;
-                indexFirstChild = 2*n + 1;
-                indexSecondChild = 2*n + 2;
             } else {
                 break;
             }
         }
+        indexFirstChild = 2*n + 1;
+        indexSecondChild = 2*n + 2;
     }
 }
 
