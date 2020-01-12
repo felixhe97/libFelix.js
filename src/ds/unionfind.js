@@ -1,3 +1,5 @@
+'use strict';
+
 // helper data structure for union-find
 class UnionFindNode {
     constructor(parentOfItem){

@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * In place TODO"non-stable" heap sort implementation
  * @param {Array<*>} arr array to sort

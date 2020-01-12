@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Self-referential trie, implemented with Object/HashMap
  */

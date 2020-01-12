@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Find k-th value in array, based on comparator.
  * If answer is NaN, error in arguments or in function 

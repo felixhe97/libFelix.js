@@ -1,0 +1,27 @@
+{
+  "name": "libfelixjs",
+  "version": "0.1.0",
+  "description": "JavaScript Algorithms and Data Structures",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --coverage ./test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/felixhe97/libFelix.js.git"
+  },
+  "keywords": [
+    "felixhe97",
+    "libfelix",
+    "libfelix.js"
+  ],
+  "author": "felixhe97",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/felixhe97/libFelix.js/issues"
+  },
+  "homepage": "https://github.com/felixhe97/libFelix.js#readme",
+  "devDependencies": {
+    "jest": "^24.9.0"
+  }
+}

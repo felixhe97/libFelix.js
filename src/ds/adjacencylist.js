@@ -1,3 +1,5 @@
+'use strict'
+
 /**
  * Adjacency list implementation of graph data structure
  */

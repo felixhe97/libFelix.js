@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Sort an array
  * @param {Array} arrayToSort - will be modified/sorted

@@ -1,3 +1,5 @@
+'use strict'
+
 /**
  * Swap arr[i] and arr[j]
  * @param {Array<any>} arr 

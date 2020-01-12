@@ -1,3 +1,5 @@
+'use strict'
+
 /**
  * In-place recursive quicksort on the indices
  * @param {Array} arrayToSort - Array to sort
