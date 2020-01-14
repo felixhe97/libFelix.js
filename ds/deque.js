@@ -14,9 +14,10 @@ class ListNode {
 /**
  * Doubly linked-list deque implementation
  */
-class Deque {
+module.exports = class Deque {
     /**
      * Double-ended queue constructor
+     *
      * @param {Iterable<*>} [iterable] - iterable object to turn into deque
      */
     constructor(iterable) {
@@ -25,7 +26,7 @@ class Deque {
         this.tail = null;
         if (iterable && iterable[Symbol.iterator]) {
             for (let item of iterable) {
-                this.pushBack(item);          
+                this.pushBack(item);
             }
         }
     }
@@ -41,6 +42,7 @@ class Deque {
 
     /**
      * Add item to back of deque
+     *
      * @param {*} item
      */
     pushBack(item){
@@ -58,7 +60,8 @@ class Deque {
 
     /**
      * Add item to front of deque
-     * @param {*} item 
+     *
+     * @param {*} item
      */
     pushFront(item){
         if (this.length) {
@@ -75,6 +78,7 @@ class Deque {
 
     /**
      * Remove item from back of deque, and return it
+     *
      * @returns {*} last item
      */
     popBack(){
@@ -96,6 +100,7 @@ class Deque {
 
     /**
      * Removes item from front of deque, and returns it
+     *
      * @returns {*} first item
      */
     popFront(){
@@ -140,8 +145,9 @@ class Deque {
     /**
      * Removes first matching item from deque,
      * returns new length, or -1 if not found
+     *
      * @param {*} item to remove from deque
-     * @returns {Number} new length, or -1 
+     * @returns {Number} new length, or -1
      */
     removeItem(item) {
         if (this.length) {
@@ -173,6 +179,7 @@ class Deque {
 
     /**
      * Returns item at given 0-based index of deque
+     *
      * @param {Number} index - 0-based index of deque to access
      * @returns {*} - item at index of deque, or null
      */
@@ -190,8 +197,9 @@ class Deque {
 
     /**
      * Returns 0-based index of item in deque, or -1 if not found
+     *
      * @param {*} item thing to search for in deque
-     * @returns {Number} 0-based index in deque, or -1 
+     * @returns {Number} 0-based index in deque, or -1
      */
     has(item) {
         if (node.length) {
@@ -205,9 +213,7 @@ class Deque {
                     ++index;
                 }
             }
-        } 
+        }
         return -1;
     }
 }
-
-module.exports = Deque;

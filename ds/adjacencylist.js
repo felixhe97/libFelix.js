@@ -3,7 +3,7 @@
 /**
  * Adjacency list implementation of graph data structure
  */
-class AdjacencyList {
+module.exports = class AdjacencyList {
     /**
      * TODO
      * @param {Array<*>} [iterable] 
@@ -186,5 +186,3 @@ class AdjacencyList {
 // acyclic graphs
 // static djikstra methods
 // static kruskal methods
-
-module.exports = AdjacencyList;

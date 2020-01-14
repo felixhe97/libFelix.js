@@ -3,10 +3,10 @@
 /**
  * Self-referential trie, implemented with Object/HashMap
  */
-class Trie {
+module.exports = class Trie {
     /**
      * Construct a Trie
-     * @param {String} [arg] optional string to initiate trie 
+     * @param {string} [arg] optional string to initiate trie
      */
     constructor(arg) {
         this.flag = false;
@@ -18,8 +18,8 @@ class Trie {
 
     /**
      * Returns true if string added to Trie, false otherwise
-     * @param {String} str to add to Trie
-     * @returns {Boolean}
+     * @param {string} str
+     * @returns {boolean}
      */
     add(str) {
         if (typeof str === "string") {
@@ -41,8 +41,8 @@ class Trie {
 
     /**
      * Returns true if string found in Trie, false otherwise
-     * @param {String} str to find in Trie
-     * @returns {Boolean}
+     * @param {string} str
+     * @returns {boolean}
      */
     find(str) {
         if (typeof str === "string") {
@@ -62,7 +62,7 @@ class Trie {
 
     /**
      * Guarantees string won't be in Trie
-     * @param {String} str
+     * @param {string} str
      */
     delete(str) {
         if (typeof str === "string") {
@@ -94,5 +94,3 @@ class Trie {
         }
     }
 }
-
-module.exports = Trie;

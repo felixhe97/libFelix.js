@@ -1,43 +1,35 @@
 'use strict'
 
-/**
- * Swap arr[i] and arr[j]
- * @param {Array<any>} arr 
- * @param {Number} i 
- * @param {Number} j 
- */
-function swap(arr, i, j) {
-    let temp = arr[i];
-    arr[i] = arr[j];
-    arr[j] = temp;
-}
+const swap = require('../utils/swapElements');
 
 /**
  * Helper function for BinaryHeap.push()
- * @param {Array<any>} [arr] 
- * @param {Function} [comparator] 
+ * @param {Array<any>} [arr]
+ * @param {function} [comparator]
  */
 function propagateUp(arr, comparator) {
     let index = arr.length - 1;
     let parentIndex = Math.trunc((index - 1) / 2);
     while (parentIndex >= 0 && comparator(arr[parentIndex], arr[index]) > 0) {
-        swap(arr, parentIndex, index);   
+        swap(arr, parentIndex, index);
         index = parentIndex;
-        parentIndex = Math.trunc((index - 1) / 2);     
-    } 
+        parentIndex = Math.trunc((index - 1) / 2);
+    }
 }
 
 /**
  * Helper function for BinaryHeap.pop()
- * @param {Array<any>} arr 
- * @param {Function} comparator 
+ * @param {Array<any>} arr
+ * @param {function} comparator
  */
 function propagateDown(arr, comparator) {
     let n = 0;
     let indexFirstChild = 2*n + 1;
     let indexSecondChild = 2*n + 2;
     while (indexFirstChild < arr.length) {
-        if (indexSecondChild >= arr.length || comparator(arr[indexFirstChild], arr[indexSecondChild]) <= 0) {
+        if (indexSecondChild >= arr.length || comparator(arr[indexFirstChild],
+            arr[indexSecondChild]) <= 0)
+        {
             if (comparator(arr[indexFirstChild], arr[n]) <= 0) {
                 swap(arr, n, indexFirstChild);
                 n = indexFirstChild;
@@ -60,7 +52,7 @@ function propagateDown(arr, comparator) {
 /**
  * Binary heap, array-based implementation, default min heap
  */
-class BinaryHeap {
+module.exports = class BinaryHeap {
     constructor(iterable, defaultComparator = (a,b)=>a-b) {
         this.comparator = defaultComparator;
         this.array = [];
@@ -99,7 +91,7 @@ class BinaryHeap {
 
     /**
      * Insert an item into heap
-     * @param {*} item 
+     * @param {*} item
      */
     push(item) {
         this.array.push(item);
@@ -120,5 +112,3 @@ class BinaryHeap {
         }
     }
 }
-
-module.exports = BinaryHeap;
