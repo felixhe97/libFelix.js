@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 /**
  * Adjacency list implementation of graph data structure
@@ -6,8 +6,8 @@
 module.exports = class AdjacencyList {
     /**
      * TODO
-     * @param {Array<*>} [iterable] 
-     * @param {boolean} [directed] 
+     * @param {Array<*>} [iterable]
+     * @param {boolean} [directed]
      */
     constructor(iterable, directed = false){
         this.nodes = new Map();
@@ -37,24 +37,27 @@ module.exports = class AdjacencyList {
     }
 
     /**
-     * Returns number of vertices in graph
+     * Returns number of vertices in graph.
      */
     get length() {
         return this.nodes.size();
     }
 
     /**
-     * Returns true if item is a vertex in graph, 
-     * otherwise return false
-     * @param {*} vertex 
+     * Returns true if item is a vertex in graph, otherwise return false.
+     *
+     * @param {*} vertex
+     * @returns {boolean}
      */
     inGraph(vertex){
         return this.nodes.has(vertex);
     }
 
     /**
-     * Returns true if a node is in graph after call
-     * @param {*} item 
+     * Returns true if a node is in graph after call.
+     *
+     * @param {*} item
+     * @returns {boolean}
      */
     addVertex(item){
         if (!this.inGraph(item)) {
@@ -65,8 +68,10 @@ module.exports = class AdjacencyList {
 
     /**
      * Returns true if a node is not in graph after call,
-     * removes all edges leaving from node, and all edges going to node
-     * @param {*} item 
+     * removes all edges leaving from node, and all edges going to node.
+     *
+     * @param {*} item
+     * @returns {boolean}
      */
     removeVertex(item){
         if (this.inGraph(item)){
@@ -79,11 +84,12 @@ module.exports = class AdjacencyList {
     }
 
     /**
-     * Returns true if graph now has a directed edge from item1 to item2, 
-     * creating nodes and overwriting previous edges within graph if necessary
-     * @param {*} item1 
-     * @param {*} item2 
-     * @param {Number} [weight] 
+     * Returns true if graph now has a directed edge from item1 to item2,
+     * creating nodes and overwriting previous edges within graph if necessary.
+     *
+     * @param {*} item1
+     * @param {*} item2
+     * @param {number} [weight]
      */
     addDirectedEdge(item1, item2, weight = 0){
         this.addVertex(item1);
@@ -93,11 +99,13 @@ module.exports = class AdjacencyList {
     }
 
     /**
-     * Returns true if there is biderectional edge of weight between item1 and item2,
-     * creating nodes and overwriting previous edges within graph if necessary
-     * @param {*} item1 
-     * @param {*} item2 
-     * @param {Number} [weight] 
+     * Returns true if there is biderectional edge of weight between item1 and
+     * item2, creating nodes and overwriting previous edges within graph if
+     * necessary.
+     *
+     * @param {*} item1
+     * @param {*} item2
+     * @param {number} [weight]
      */
     addUndirectedEdge(item1, item2, weight = 0){
         return this.addDirectedEdge(item1, item2, weight) && this.addDirectedEdge(item2, item1, weight);
@@ -105,9 +113,10 @@ module.exports = class AdjacencyList {
 
     /**
      * Returns true if edge from item1 to item2 is deleted,
-     * false if no edge was there or otherwise 
-     * @param {*} item1 
-     * @param {*} item2 
+     * false if no edge was there or otherwise.
+     *
+     * @param {*} item1
+     * @param {*} item2
      */
     removeDirectedEdge(item1, item2){
         if (this.inGraph(item1) && this.nodes.get(item1).has(item2)) {
@@ -118,22 +127,25 @@ module.exports = class AdjacencyList {
 
     /**
      * Returns true if edge between item1 and item2 is deleted,
-     * false if no biderectional edge of same weight was there or otherwise 
-     * @param {*} item1 
-     * @param {*} item2 
+     * false if no biderectional edge of same weight was there or otherwise
+     *
+     * @param {*} item1
+     * @param {*} item2
      */
     removeUndirectedEdge(item1, item2){
         if (this.isUndirectedEdgeBetween(item1, item2)) {
-            return this.removeDirectedEdge(item1, item2) && this.removeDirectedEdge(item2, item1);
+            return this.removeDirectedEdge(item1, item2) &&
+                this.removeDirectedEdge(item2, item1);
         }
         return false;
     }
 
     /**
      * Returns edge weight from item1 to item2,
-     * otherwise returns NaN
-     * @param {*} item1 
-     * @param {*} item2 
+     * otherwise returns NaN.
+     *
+     * @param {*} item1
+     * @param {*} item2
      */
     getEdgeWeightFrom(item1, item2) {
         if (this.isEdgeFrom(item1, item2)) {
@@ -144,20 +156,23 @@ module.exports = class AdjacencyList {
 
     /**
      * Returns true is there is an undirected edge between item1 and item2,
-     * acts correctly for undirected graphs, returns false otherwise
-     * @param {*} item1 
-     * @param {*} item2 
+     * acts correctly for undirected graphs, returns false otherwise.
+     *
+     * @param {*} item1
+     * @param {*} item2
      */
     isUndirectedEdgeBetween(item1, item2) {
-        return this.getEdgeWeightFrom(item1, item2) === this.getEdgeWeightFrom(item2, item1) 
-            && !Number.isNaN(this.getEdgeWeightFrom(item1, item2));
+        return (this.getEdgeWeightFrom(item1, item2) ===
+            this.getEdgeWeightFrom(item2, item1)) &&
+            !Number.isNaN(this.getEdgeWeightFrom(item1, item2));
     }
 
     /**
      * Returns true if there is an edge from item1 to item2,
-     * returns false otherwise
-     * @param {*} item1 
-     * @param {*} item2 
+     * returns false otherwise.
+     *
+     * @param {*} item1
+     * @param {*} item2
      */
     isEdgeFrom(item1, item2){
         return this.inGraph(item1) && this.nodes.get(item1).has(item2);
@@ -165,8 +180,9 @@ module.exports = class AdjacencyList {
 
     /**
      * Returns array of nodes that are reachable from given item,
-     * else return null
-     * @param {*} item 
+     * else return null.
+     *
+     * @param {*} item
      */
     outgoingVertices(item){
         if (this.inGraph(item)) {

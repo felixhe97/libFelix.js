@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 /**
  * Private class for Deque members

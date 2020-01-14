@@ -1,9 +1,10 @@
-'use strict'
+'use strict';
 
 const swap = require('../utils/swapElements');
 
 /**
  * Helper function for BinaryHeap.push()
+ *
  * @param {Array<any>} [arr]
  * @param {function} [comparator]
  */
@@ -19,6 +20,7 @@ function propagateUp(arr, comparator) {
 
 /**
  * Helper function for BinaryHeap.pop()
+ *
  * @param {Array<any>} arr
  * @param {function} comparator
  */
@@ -91,6 +93,7 @@ module.exports = class BinaryHeap {
 
     /**
      * Insert an item into heap
+     *
      * @param {*} item
      */
     push(item) {

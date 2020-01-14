@@ -6,6 +6,7 @@
 module.exports = class Trie {
     /**
      * Construct a Trie
+     *
      * @param {string} [arg] optional string to initiate trie
      */
     constructor(arg) {
@@ -18,6 +19,7 @@ module.exports = class Trie {
 
     /**
      * Returns true if string added to Trie, false otherwise
+     *
      * @param {string} str
      * @returns {boolean}
      */
@@ -41,6 +43,7 @@ module.exports = class Trie {
 
     /**
      * Returns true if string found in Trie, false otherwise
+     *
      * @param {string} str
      * @returns {boolean}
      */
@@ -62,6 +65,7 @@ module.exports = class Trie {
 
     /**
      * Guarantees string won't be in Trie
+     *
      * @param {string} str
      */
     delete(str) {
