@@ -1,6 +1,6 @@
 'use strict'
 
-const getRandIndex = require('../utils/getRandomNum').getRandomIntInclusive;
+const getRandIndex = require('../utils/getRand').getRandomIntInclusive;
 const swap = require('../utils/swapElements');
 
 /**

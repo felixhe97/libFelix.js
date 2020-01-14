@@ -1,6 +1,8 @@
 'use strict';
 
 /**
+ * Swaps elements at i and j in given array.
+ *
  * @param {Array<*>} arr
  * @param {number} i
  * @param {number} j

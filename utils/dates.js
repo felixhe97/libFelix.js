@@ -47,7 +47,8 @@ module.exports.isValidDay = function(day, month, year) {
 
 
 /**
- * Calculate the age, given date of creation, and day of calculation.
+ * Calculate the age, given date of creation, and day of calculation. Assumes
+ * dates are >= 0CE.
  *
  * @param {string} dateCreation - in format of dd-mm-yyyy
  * @param {string} dateCalculate - in format of dd-mm-yyyy
