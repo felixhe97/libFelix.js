@@ -1,53 +1,26 @@
 'use strict';
 
+const getRandIndex = require('../utils/getRandomNum').getRandomIntInclusive;
+const swap = require('../utils/swapElements');
+
 /**
  * Find k-th value in array, based on comparator.
- * If answer is NaN, error in arguments or in function 
- * @param {Array} arrayToSearch - input array
- * @param {Number} k - 1-based thing to find
- * @param {Function} [compareFunction] - optional, default is find k-th smallest
+ *
+ * @param {Array<*>} arr- input array
+ * @param {number} k - 1-based thing to find
+ * @param {function} [compareFunction] - optional, default is find k-th
+ * smallest in array of numbers
+ * @returns k-th value in array, or NaN
  */
-const quickSelect = (function(){
-    /**
-     * Get random number within range of [incMin, incMax]
-     * @param {Number} incMin 
-     * @param {Number} incMax 
-     * @returns {Number}
-     */
-    function getRandIndex(incMin, incMax) {
-        incMin = Math.ceil(incMin);
-        incMax = Math.floor(incMax);
-        return Math.floor(Math.random() * (incMax - incMin + 1)) + incMin;
-    }
-
-    /**
-     * Default comparator for quickselect
-     * @param {*} a 
-     * @param {*} b 
-     */
-    function defaultCompare(a, b) {
-        return a - b;
-    }
-
-    /**
-     * Swap elements in arr[i] and arr[j]
-     * @param {Array} arr
-     * @param {Number} i 
-     * @param {Number} j 
-     */
-    function swap(arr, i, j) {
-        let temp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = temp;
-    }
-
+module.exports = (function(){
     /**
      * Main quickselect logic, acting on static arr variable
+     *
      * @param {Array} arr - array to search
-     * @param {Number} k - kth item to return 
-     * @param {Function} [comparator] - optional, default is find k-th smallest
+     * @param {number} k - kth item to return
+     * @param {function} comparator
      */
-    function iterativeQuickSelect(arr, k, comparator = defaultCompare){
+    function iterativeQuickSelect(arr, k, comparator){
         let begin = 0;
         let end = arr.length - 1;
         --k;
@@ -77,17 +50,14 @@ const quickSelect = (function(){
         return arr[k];
     }
 
-    return function(arrayToSearch, k, compareFunction) {
+    return function(arrayToSearch, k, comparator = (a, b) => a-b) {
         let ans = NaN;
-        if (arrayToSearch && Array.isArray(arrayToSearch) && k && Number.isInteger(k)) {
-            if (compareFunction && typeof compareFunction == "function") {
-                ans = iterativeQuickSelect(arrayToSearch, k, compareFunction);
-            } else {
-                ans = iterativeQuickSelect(arrayToSearch, k);
-            }
+        if (arrayToSearch && Array.isArray(arrayToSearch) && k &&
+            Number.isInteger(k) && comparator &&
+            typeof comparator === "function")
+        {
+            ans = iterativeQuickSelect(arrayToSearch, k, comparator);
         }
         return ans;
     }
 })();
-
-module.exports = quickSelect;

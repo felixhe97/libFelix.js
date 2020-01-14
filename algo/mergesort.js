@@ -1,28 +1,14 @@
 'use strict';
 
 /**
- * Sort an array
- * @param {Array} arrayToSort - will be modified/sorted
- * @param {Function} [compareFunction] - optional comparator
- * @returns {Array} - the sorted array, for chaining calls
+ * Merge sort implementation
+ * @param {Array<*>} arrayToSort - will be modified/sorted
+ * @param {function} [comparator] - default by ascending number
+ * @returns {Array<*>} - the sorted array, for chaining calls
  */
-const mergeSort = (function(){
-    /**
-     * Default comparator for mergeSort
-     * @param {*} a 
-     * @param {*} b 
-     */
-    function defaultCompare(a, b){
-        return a - b;
-    }
-
-    // pseudo-static member variables to reduce
-    // redundant recursive function arguments
-    let arr = null;
-    let comparator = defaultCompare;
-
+module.exports = (function(){
     // TODO merge could be improved to use less temp memory
-    function merge(begin, mid, end) {
+    function merge(begin, mid, end, comparator) {
         let i = begin;
         let j = mid + 1;
         let temp = [];
@@ -50,32 +36,24 @@ const mergeSort = (function(){
 
     /**
      * Recursive top down merge sort splitter
-     * @param {Number} begin - inclusive array index
-     * @param {Number} end - inclusive array index
+     * @param {number} begin - inclusive array index
+     * @param {number} end - inclusive array index
      */
-    function split(begin, end){
+    function split(begin, end, comparator){
         if (begin < end) {
             let mid = (Math.trunc((end - begin) / 2)) + begin;
-            split(begin, mid);
-            split(mid + 1, end);
-            merge(begin, mid, end);
+            split(begin, mid, comparator);
+            split(mid + 1, end, comparator);
+            merge(begin, mid, end, comparator);
         }
     }
 
-    return function(arrayToSort, compareFunction) {
-        if (arrayToSort && Array.isArray(arrayToSort)) {
-            arr = arrayToSort;
-            if (compareFunction && typeof compareFunction == "function") {
-                comparator = compareFunction;
-                split(0, arr.length - 1);
-                comparator = defaultCompare;
-            } else {
-                split(0, arr.length - 1);
-            }
-            arr = null;
+    return function(arrayToSort, comparator = (a,b) => a-b) {
+        if (arrayToSort && Array.isArray(arrayToSort) && comparator &&
+            typeof comparator === "function")
+        {
+            split(0, arr.length - 1);
         }
         return arrayToSort;
     }
 })();
-
-module.exports = mergeSort;

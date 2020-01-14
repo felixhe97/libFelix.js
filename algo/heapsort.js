@@ -1,61 +1,48 @@
 'use strict';
 
+const swap = require('../utils/swapElements');
+
 /**
  * In place TODO"non-stable" heap sort implementation
- * @param {Array<*>} arr array to sort
- * @param {Function} compareFunction default is comparing numbers within array
- * @returns {Array<*>} sorted, default numerical ascending order
+ *
+ * @param {Array<*>} arr - array to modify/sort
+ * @param {function} [comparator] - default sort by ascending number
+ * @returns {Array<*>} for method chaining
  */
-const heapSort = (function(){
-    let comparator = defaultCompare;
-    
-    /**
-     * Default comparator for heapsort,
-     * will sort numbers in increasing order
-     * @param {Number} a 
-     * @param {Number} b 
-     */
-    function defaultCompare(a, b) {
-        return a-b;
-    }
-
-    /**
-     * Swap arr[i] and arr[j]
-     * @param {Array<any>} arr 
-     * @param {Number} i 
-     * @param {Number} j 
-     */
-    function swap(arr, i, j) {
-        let temp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = temp;
-    }
-
+module.exports = (function(){
     /**
      * Helper function for arrayToHeap()
-     * @param {Array<*>} arr 
-     * @param {Number} index 
+     *
+     * @param {Array<*>} arr
+     * @param {number} index
+     * @param {function} comparator
      */
-    function propagateUp(arr, index){
+    function propagateUp(arr, index, comparator){
         let parentIndex = Math.trunc((index - 1) / 2);
-        while (parentIndex >= 0 && comparator(arr[parentIndex], arr[index]) > 0) {
-            swap(arr, parentIndex, index);   
+        while (parentIndex >= 0 &&
+            comparator(arr[parentIndex], arr[index]) > 0)
+        {
+            swap(arr, parentIndex, index);
             index = parentIndex;
-            parentIndex = Math.trunc((index - 1) / 2);     
-        } 
+            parentIndex = Math.trunc((index - 1) / 2);
+        }
     }
 
     /**
      * Helper function for heapToArray()
-     * @param {Array<*>} arr 
-     * @param {Number} index 
+     *
+     * @param {Array<*>} arr
+     * @param {number} index
+     * @param {function} comparator
      */
-    function propagateDown(arr, index){
+    function propagateDown(arr, index, comparator){
         let n = 0;
         let indexFirstChild = 2*n + 1;
         let indexSecondChild = 2*n + 2;
         while (indexFirstChild < index) {
-            if (indexSecondChild >= index || comparator(arr[indexFirstChild], arr[indexSecondChild]) <= 0) {
+            if (indexSecondChild >= index ||
+                comparator(arr[indexFirstChild], arr[indexSecondChild]) <= 0)
+            {
                 if (comparator(arr[indexFirstChild], arr[n]) <= 0) {
                     swap(arr, n, indexFirstChild);
                     n = indexFirstChild;
@@ -77,42 +64,38 @@ const heapSort = (function(){
 
     /**
      * Heapify the unsorted array in place
-     * @param {Array<*>} arr 
+     *
+     * @param {Array<*>} arr
+     * @param {function} comparator
      */
-    function arrayToHeap(arr){
+    function arrayToHeap(arr, comparator){
         for (let x = 0; x < arr.length; ++x) {
-            propagateUp(arr, x);
+            propagateUp(arr, x, comparator);
         }
     }
 
     /**
      * Shorten heap, while lengthening sorted array, in place
-     * @param {Array<*>} arr 
+     *
+     * @param {Array<*>} arr
+     * @param {function} comparator
      */
-    function heapToArray(arr){
+    function heapToArray(arr, comparator){
         let x = arr.length - 1;
         while (x > 0) {
             swap(arr, 0, x);
             --x;
-            propagateDown(arr, x);
+            propagateDown(arr, x, comparator);
         }
     }
 
-    // TODO sorting array has slight errors, also in opposite order
-    return function(arr, compareFunction){
-        if (arr && Array.isArray(arr)) {
-            if (compareFunction && typeof compareFunction === "function") {
-                comparator = compareFunction;
-            }
-            arrayToHeap(arr);
-            heapToArray(arr);
-            comparator = defaultCompare;
+    return function(arr, comparator = (a, b) => a-b){
+        if (arr && Array.isArray(arr) && comparator &&
+            typeof comparator === "function")
+        {
+            arrayToHeap(arr, comparator);
+            heapToArray(arr, comparator);
         }
         return arr;
     }
 })();
-
-// TODO 93 and 54 swap in wrong order
-console.log(heapSort([4,3,3,-2,11,93,123,4,54, -4, -4, -1, 0 ,0 ]));
-
-module.exports = heapSort;
