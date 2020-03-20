@@ -12,26 +12,24 @@ const swap = require('../utils/swapElements');
  * smallest in array of numbers
  * @returns k-th value in array, or NaN
  */
-module.exports = (function(){
+module.exports = (function() {
     /**
-     * Main quickselect logic, acting on static arr variable
+     * Main quickselect logic
      *
      * @param {Array} arr - array to search
      * @param {number} k - kth item to return
      * @param {function} comparator
      */
-    function iterativeQuickSelect(arr, k, comparator){
+    function iterativeQuickSelect(arr, k, comparator) {
         let begin = 0;
         let end = arr.length - 1;
-        --k;
-        while(begin < end) {
+        while (begin < end) {
             let pivotIndex = getRandIndex(begin, end);
-            let pivot = arr[pivotIndex];
             swap(arr, pivotIndex, end);
             let i = begin;
             let j = end - 1;
             while (i <= j) {
-                if (comparator(arr[i], pivot) <= 0) {
+                if (comparator(arr[i], arr[pivotIndex]) <= 0) {
                     ++i;
                 } else {
                     swap(arr, i, j);
@@ -52,10 +50,11 @@ module.exports = (function(){
 
     return function(arrayToSearch, k, comparator = (a, b) => a-b) {
         let ans = NaN;
-        if (arrayToSearch && Array.isArray(arrayToSearch) && k &&
-            Number.isInteger(k) && comparator &&
+        if (arrayToSearch && Array.isArray(arrayToSearch) &&
+            Number.isInteger(k) && k >= 1 && comparator &&
             typeof comparator === "function")
         {
+            --k;
             ans = iterativeQuickSelect(arrayToSearch, k, comparator);
         }
         return ans;

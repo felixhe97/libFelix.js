@@ -9,7 +9,7 @@ const swap = require('../utils/swapElements');
  * @param {function} [comparator] - default sort by ascending number
  * @returns {Array<*>} for method chaining
  */
-module.exports = (function(){
+module.exports = (function() {
     /**
      * Helper function for arrayToHeap()
      *
@@ -17,7 +17,7 @@ module.exports = (function(){
      * @param {number} index
      * @param {function} comparator
      */
-    function propagateUp(arr, index, comparator){
+    function propagateUp(arr, index, comparator) {
         let parentIndex = Math.trunc((index - 1) / 2);
         while (parentIndex >= 0 &&
             comparator(arr[parentIndex], arr[index]) > 0)
@@ -35,7 +35,7 @@ module.exports = (function(){
      * @param {number} index
      * @param {function} comparator
      */
-    function propagateDown(arr, index, comparator){
+    function propagateDown(arr, index, comparator) {
         let n = 0;
         let indexFirstChild = 2*n + 1;
         let indexSecondChild = 2*n + 2;
@@ -68,14 +68,14 @@ module.exports = (function(){
      * @param {Array<*>} arr
      * @param {function} comparator
      */
-    function arrayToHeap(arr, comparator){
+    function arrayToHeap(arr, comparator) {
         for (let x = 0; x < arr.length; ++x) {
             propagateUp(arr, x, comparator);
         }
     }
 
     /**
-     * Shorten heap, while lengthening sorted array, in place
+     * Shortens heap, while lengthening sorted array, in place
      *
      * @param {Array<*>} arr
      * @param {function} comparator
@@ -89,7 +89,7 @@ module.exports = (function(){
         }
     }
 
-    return function(arr, comparator = (a, b) => a-b){
+    return function(arr, comparator = (a, b) => a - b) {
         if (arr && Array.isArray(arr) && comparator &&
             typeof comparator === "function")
         {

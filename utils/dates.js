@@ -19,7 +19,6 @@ function parseDate(str) {
     }
 }
 
-
 /**
  * Checks if combination of day, month, and year are a valid
  * calendar day. Assumes year is >= 0CE.
@@ -44,7 +43,6 @@ module.exports.isValidDay = function(day, month, year) {
         return true;
     }
 }
-
 
 /**
  * Calculate the age, given date of creation, and day of calculation. Assumes

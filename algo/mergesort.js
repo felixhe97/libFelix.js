@@ -6,8 +6,15 @@
  * @param {function} [comparator] - default by ascending number
  * @returns {Array<*>} - the sorted array, for chaining calls
  */
-module.exports = (function(){
-    // TODO merge could be improved to use less temp memory
+module.exports = (function() {
+    /**
+     * Merge compared elements within given section of array
+     * 
+     * @param {number} begin 
+     * @param {number} mid 
+     * @param {number} end 
+     * @param {Function} comparator 
+     */
     function merge(begin, mid, end, comparator) {
         let i = begin;
         let j = mid + 1;
@@ -36,10 +43,12 @@ module.exports = (function(){
 
     /**
      * Recursive top down merge sort splitter
+     * 
      * @param {number} begin - inclusive array index
      * @param {number} end - inclusive array index
+     * @param {Function} comparator
      */
-    function split(begin, end, comparator){
+    function split(begin, end, comparator) {
         if (begin < end) {
             let mid = (Math.trunc((end - begin) / 2)) + begin;
             split(begin, mid, comparator);
@@ -48,7 +57,7 @@ module.exports = (function(){
         }
     }
 
-    return function(arrayToSort, comparator = (a,b) => a-b) {
+    return function(arrayToSort, comparator = (a, b) => a - b) {
         if (arrayToSort && Array.isArray(arrayToSort) && comparator &&
             typeof comparator === "function")
         {

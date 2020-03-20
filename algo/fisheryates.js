@@ -11,7 +11,7 @@ const swap = require('../utils/swapElements');
  */
 module.exports = function(arr, rng = Math.random){
     if (arr && Array.isArray(arr)) {
-        for (let i = arr.length-1; i >= 0; --i){
+        for (let i = arr.length - 1; i >= 0; --i){
             let index = getIndex(0, i, rng);
             swap(arr, i, index);
         }

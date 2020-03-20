@@ -12,7 +12,6 @@ module.exports.getRandomNum = function(min, max, rng = Math.random) {
     return rng() * (min - max) + max;
 }
 
-
 /**
  * Get random integer in range of [min, max)
  *
@@ -26,7 +25,6 @@ module.exports.getRandomInt = function(min, max, rng = Math.random) {
     max = Math.floor(max);
     return Math.floor(rng() * (max - min)) + max;
 }
-
 
 /**
  * Get random integer in range of [min, max]

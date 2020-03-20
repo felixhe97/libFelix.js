@@ -6,11 +6,11 @@ const swap = require('../utils/swapElements');
 /**
  * In-place recursive quicksort on the indices
  *
- * @param {Array<*>} arrayToSort
+ * @param {Array<*>} arr - the array to be sorted/modified
  * @param {function} [comparator] - default ascending numbers
  * @return {Array<*>} - returns the sorted array for chaining function calls
  */
-module.exports = (function(){
+module.exports = (function() {
     /**
      * Quicksort partition array
      *
@@ -19,15 +19,14 @@ module.exports = (function(){
      * @param {number} end - index of array
      * @param {function} comparator
      */
-    function partition(arr, begin, end, comparator){
+    function partition(arr, begin, end, comparator) {
         if (begin < end) {
             let pivotIndex = getRandIndex(begin, end);
-            let pivot = arr[pivotIndex];
             swap(arr, pivotIndex, end);
             let i = begin;
             let j = end - 1;
             while (i <= j) {
-                if (comparator(arr[i], pivot) <= 0) {
+                if (comparator(arr[i], arr[pivotIndex]) <= 0) {
                     ++i;
                 } else {
                     swap(arr, i, j);
@@ -36,11 +35,11 @@ module.exports = (function(){
             }
             swap(arr, i, end);
             partition(arr, begin, i - 1, comparator);
-            partition(arr, i + 1, end), comparator;
+            partition(arr, i + 1, end, comparator);
         }
     }
 
-    return function(arr, comparator = (a, b) => a-b) {
+    return function(arr, comparator = (a, b) => a - b) {
         if (arr && Array.isArray(arr) && comparator &&
             typeof comparator === "function")
         {
