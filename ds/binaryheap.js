@@ -26,11 +26,11 @@ function propagateUp(arr, comparator) {
  */
 function propagateDown(arr, comparator) {
     let n = 0;
-    let indexFirstChild = 2*n + 1;
-    let indexSecondChild = 2*n + 2;
+    let indexFirstChild = 2 * n + 1;
+    let indexSecondChild = 2 * n + 2;
     while (indexFirstChild < arr.length) {
-        if (indexSecondChild >= arr.length || comparator(arr[indexFirstChild],
-            arr[indexSecondChild]) <= 0)
+        if (indexSecondChild >= arr.length || 
+            comparator(arr[indexFirstChild], arr[indexSecondChild]) <= 0)
         {
             if (comparator(arr[indexFirstChild], arr[n]) <= 0) {
                 swap(arr, n, indexFirstChild);
@@ -46,8 +46,8 @@ function propagateDown(arr, comparator) {
                 break;
             }
         }
-        indexFirstChild = 2*n + 1;
-        indexSecondChild = 2*n + 2;
+        indexFirstChild = 2 * n + 1;
+        indexSecondChild = 2 * n + 2;
     }
 }
 
@@ -55,7 +55,7 @@ function propagateDown(arr, comparator) {
  * Binary heap, array-based implementation, default min heap
  */
 module.exports = class BinaryHeap {
-    constructor(iterable, defaultComparator = (a,b)=>a-b) {
+    constructor(iterable, defaultComparator = (a, b) => a - b) {
         this.comparator = defaultComparator;
         this.array = [];
         if (iterable && iterable[Symbol.iterator]) {
@@ -106,7 +106,7 @@ module.exports = class BinaryHeap {
      */
     pop() {
         if (this.array.length) {
-            swap(this.array, 0, this.array.length-1);
+            swap(this.array, 0, this.array.length - 1);
             let first = this.array.pop();
             propagateDown(this.array, this.comparator);
             return first;

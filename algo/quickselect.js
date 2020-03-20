@@ -8,7 +8,7 @@ const swap = require('../utils/swapElements');
  *
  * @param {Array<*>} arr- input array
  * @param {number} k - 1-based thing to find
- * @param {function} [compareFunction] - optional, default is find k-th
+ * @param {function} [compareFunction] - default is find k-th
  * smallest in array of numbers
  * @returns k-th value in array, or NaN
  */

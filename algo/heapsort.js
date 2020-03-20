@@ -7,7 +7,7 @@ const swap = require('../utils/swapElements');
  *
  * @param {Array<*>} arr - array to modify/sort
  * @param {function} [comparator] - default sort by ascending number
- * @returns {Array<*>} for method chaining
+ * @returns {Array<*>} - for method chaining
  */
 module.exports = (function() {
     /**
@@ -37,8 +37,8 @@ module.exports = (function() {
      */
     function propagateDown(arr, index, comparator) {
         let n = 0;
-        let indexFirstChild = 2*n + 1;
-        let indexSecondChild = 2*n + 2;
+        let indexFirstChild = 2 * n + 1;
+        let indexSecondChild = 2 * n + 2;
         while (indexFirstChild < index) {
             if (indexSecondChild >= index ||
                 comparator(arr[indexFirstChild], arr[indexSecondChild]) <= 0)
